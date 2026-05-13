@@ -1,6 +1,19 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "framework": "vite"
+  "version": 3,
+  "builds": [
+    {
+      "src": "api/[[...all]].ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/client/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/[[...all]].ts"
+    }
+  ]
 }

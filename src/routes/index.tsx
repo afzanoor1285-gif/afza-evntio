@@ -394,7 +394,7 @@ function CTA({ t }: { t: Dict }) {
   );
 }
 
-function Footer({ t }: { t: Dict }) {
+function Footer({ t, isAr }: { t: Dict; isAr: boolean }) {
   const cols = [
     { title: t.footer.company, items: [t.footer.links.about, t.footer.links.careers, t.footer.links.press] },
     { title: t.footer.support, items: [t.footer.links.help, t.footer.links.contact, t.footer.links.faq] },
@@ -402,10 +402,10 @@ function Footer({ t }: { t: Dict }) {
   ];
   return (
     <footer className="border-t border-foreground/10 bg-background px-6 py-12">
-      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
-        <div>
+      <div className={cn("mx-auto grid max-w-7xl gap-10 md:grid-cols-4", isAr ? "text-right" : "text-left")}> 
+        <div className={isAr ? "md:order-last" : undefined}>
           <Logo />
-          <p className="mt-4 max-w-xs text-sm text-foreground/60">{t.footer.tagline}</p>
+          <p className={cn("mt-4 max-w-xs text-sm text-foreground/60", isAr ? "mx-auto md:mr-0 md:ml-auto" : "")}>{t.footer.tagline}</p>
         </div>
         {cols.map((c) => (
           <div key={c.title}>
@@ -413,7 +413,7 @@ function Footer({ t }: { t: Dict }) {
             <ul className="mt-3 space-y-2">
               {c.items.map((i) => (
                 <li key={i}>
-                  <a href="#" className="text-sm text-foreground/60 hover:text-foreground">{i}</a>
+                  <a href="#" className={cn("text-sm text-foreground/60 hover:text-foreground", isAr ? "text-right" : "text-left")}>{i}</a>
                 </li>
               ))}
             </ul>
